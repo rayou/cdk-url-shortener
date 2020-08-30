@@ -1,0 +1,4529 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`basic setup 1`] = `
+Object {
+  "Outputs": Object {
+    "myURLShortenerBasicApiEndpointEC3671EE": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "myURLShortenerBasicApiA0BF566D",
+            },
+            ".execute-api.",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            ".",
+            Object {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            Object {
+              "Ref": "myURLShortenerBasicApiDeploymentStageprod6D066B9B",
+            },
+            "/",
+          ],
+        ],
+      },
+    },
+    "myURLShortenerBasicApiKeyURL46B5DF36": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://console.aws.amazon.com/apigateway/home?region=",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            "#/api-keys/",
+            Object {
+              "Ref": "myURLShortenerBasicApiApiKey33C46710",
+            },
+          ],
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bArtifactHash47AA4A68": Object {
+      "Description": "Artifact hash for asset \\"f7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0b\\"",
+      "Type": "String",
+    },
+    "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3Bucket46CAA9D9": Object {
+      "Description": "S3 bucket for asset \\"f7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0b\\"",
+      "Type": "String",
+    },
+    "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3VersionKey04669B18": Object {
+      "Description": "S3 key for asset version \\"f7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0b\\"",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "myURLShortenerBasicApiA0BF566D": Object {
+      "Properties": Object {
+        "Name": "myURLShortenerBasic-URLShortener-Api",
+      },
+      "Type": "AWS::ApiGateway::RestApi",
+    },
+    "myURLShortenerBasicApiAccountD66E68A5": Object {
+      "DependsOn": Array [
+        "myURLShortenerBasicApiA0BF566D",
+      ],
+      "Properties": Object {
+        "CloudWatchRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerBasicApiCloudWatchRole34F255E2",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ApiGateway::Account",
+    },
+    "myURLShortenerBasicApiApiKey33C46710": Object {
+      "Properties": Object {
+        "Enabled": true,
+        "Name": "Default-URLShortener-ApiKey",
+        "StageKeys": Array [
+          Object {
+            "RestApiId": Object {
+              "Ref": "myURLShortenerBasicApiA0BF566D",
+            },
+            "StageName": Object {
+              "Ref": "myURLShortenerBasicApiDeploymentStageprod6D066B9B",
+            },
+          },
+        ],
+      },
+      "Type": "AWS::ApiGateway::ApiKey",
+    },
+    "myURLShortenerBasicApiCloudWatchRole34F255E2": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "myURLShortenerBasicApiDeployment313BB8B939a835eb54c4fba43cd88d3e61727f62": Object {
+      "DependsOn": Array [
+        "myURLShortenerBasicApiidGETF54B3523",
+        "myURLShortenerBasicApiid2BE2C0C9",
+        "myURLShortenerBasicApiGET0F3DBFEE",
+        "myURLShortenerBasicApiPOST9542C53A",
+        "myURLShortenerBasicApiValidationModelC252DEEB",
+        "myURLShortenerBasicApivalidatorB109FC69",
+      ],
+      "Properties": Object {
+        "Description": "Automatically created by the RestApi construct",
+        "RestApiId": Object {
+          "Ref": "myURLShortenerBasicApiA0BF566D",
+        },
+      },
+      "Type": "AWS::ApiGateway::Deployment",
+    },
+    "myURLShortenerBasicApiDeploymentStageprod6D066B9B": Object {
+      "Properties": Object {
+        "DeploymentId": Object {
+          "Ref": "myURLShortenerBasicApiDeployment313BB8B939a835eb54c4fba43cd88d3e61727f62",
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerBasicApiA0BF566D",
+        },
+        "StageName": "prod",
+      },
+      "Type": "AWS::ApiGateway::Stage",
+    },
+    "myURLShortenerBasicApiGET0F3DBFEE": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseTemplates": Object {
+                "text/html": "Not Found",
+              },
+              "StatusCode": "404",
+            },
+          ],
+          "PassthroughBehavior": "WHEN_NO_TEMPLATES",
+          "RequestTemplates": Object {
+            "application/json": "{\\"statusCode\\":404}",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Content-Type": true,
+              "method.response.header.Location": true,
+            },
+            "StatusCode": "301",
+          },
+          Object {
+            "StatusCode": "404",
+          },
+        ],
+        "ResourceId": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerBasicApiA0BF566D",
+            "RootResourceId",
+          ],
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerBasicApiA0BF566D",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "myURLShortenerBasicApiPOST9542C53A": Object {
+      "Properties": Object {
+        "ApiKeyRequired": true,
+        "AuthorizationType": "NONE",
+        "HttpMethod": "POST",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "myURLShortenerBasicFunctionB99DCDA0",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "RequestModels": Object {
+          "application/json": Object {
+            "Ref": "myURLShortenerBasicApiValidationModelC252DEEB",
+          },
+        },
+        "RequestParameters": Object {
+          "method.request.header.Content-Type": true,
+        },
+        "RequestValidatorId": Object {
+          "Ref": "myURLShortenerBasicApivalidatorB109FC69",
+        },
+        "ResourceId": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerBasicApiA0BF566D",
+            "RootResourceId",
+          ],
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerBasicApiA0BF566D",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "myURLShortenerBasicApiPOSTApiPermissionTestmyURLShortenerBasicApi5C8B21C9POST8537F5E0": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerBasicFunctionB99DCDA0",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "myURLShortenerBasicApiA0BF566D",
+              },
+              "/test-invoke-stage/POST/",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "myURLShortenerBasicApiPOSTApiPermissionmyURLShortenerBasicApi5C8B21C9POSTB131E109": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerBasicFunctionB99DCDA0",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "myURLShortenerBasicApiA0BF566D",
+              },
+              "/",
+              Object {
+                "Ref": "myURLShortenerBasicApiDeploymentStageprod6D066B9B",
+              },
+              "/POST/",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "myURLShortenerBasicApiUsagePlan4AC30255": Object {
+      "Properties": Object {
+        "ApiStages": Array [
+          Object {
+            "ApiId": Object {
+              "Ref": "myURLShortenerBasicApiA0BF566D",
+            },
+            "Stage": Object {
+              "Ref": "myURLShortenerBasicApiDeploymentStageprod6D066B9B",
+            },
+            "Throttle": Object {},
+          },
+        ],
+        "Description": "Usage plan for Default url shortener api",
+        "UsagePlanName": "Default-URLShortener-UsagePlan",
+      },
+      "Type": "AWS::ApiGateway::UsagePlan",
+    },
+    "myURLShortenerBasicApiUsagePlanUsagePlanKeyResource4A4FCECA": Object {
+      "Properties": Object {
+        "KeyId": Object {
+          "Ref": "myURLShortenerBasicApiApiKey33C46710",
+        },
+        "KeyType": "API_KEY",
+        "UsagePlanId": Object {
+          "Ref": "myURLShortenerBasicApiUsagePlan4AC30255",
+        },
+      },
+      "Type": "AWS::ApiGateway::UsagePlanKey",
+    },
+    "myURLShortenerBasicApiValidationModelC252DEEB": Object {
+      "Properties": Object {
+        "ContentType": "application/json",
+        "Name": "ValidationModel",
+        "RestApiId": Object {
+          "Ref": "myURLShortenerBasicApiA0BF566D",
+        },
+        "Schema": Object {
+          "$schema": "http://json-schema.org/draft-04/schema#",
+          "properties": Object {
+            "url": Object {
+              "format": "uri",
+              "pattern": "^https?://",
+              "type": "string",
+            },
+          },
+          "required": Array [
+            "url",
+          ],
+          "type": "object",
+        },
+      },
+      "Type": "AWS::ApiGateway::Model",
+    },
+    "myURLShortenerBasicApiid2BE2C0C9": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerBasicApiA0BF566D",
+            "RootResourceId",
+          ],
+        },
+        "PathPart": "{id}",
+        "RestApiId": Object {
+          "Ref": "myURLShortenerBasicApiA0BF566D",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "myURLShortenerBasicApiidGETF54B3523": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "Credentials": Object {
+            "Fn::GetAtt": Array [
+              "myURLShortenerBasicRole362A7CC1",
+              "Arn",
+            ],
+          },
+          "IntegrationHttpMethod": "POST",
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Content-Type": "'text/html; charset=UTF-8'",
+                "method.response.header.Location": "integration.response.body.Attributes.url.S",
+              },
+              "ResponseTemplates": Object {
+                "text/html; charset=UTF-8": "#if($input.path('$.Attributes.url.S').isEmpty() == false)#set($url = $input.path('$.Attributes.url.S'))#set($context.responseOverride.header.Location = $url)<!DOCTYPE html><html><head><meta charset=\\"UTF-8\\" /><meta http-equiv=\\"refresh\\" content=\\"0;url=$url\\" /><title>Redirecting to $url</title></head><body>Redirecting to <a href=\\"$url\\">$url</a>.</body></html>#else#set($context.responseOverride.status = 404)#end",
+              },
+              "SelectionPattern": "200",
+              "StatusCode": "301",
+            },
+            Object {
+              "ResponseTemplates": Object {
+                "text/html": "Not Found",
+              },
+              "StatusCode": "404",
+            },
+          ],
+          "PassthroughBehavior": "WHEN_NO_TEMPLATES",
+          "RequestTemplates": Object {
+            "application/json": Object {
+              "Fn::Join": Array [
+                "",
+                Array [
+                  "{\\"TableName\\":\\"",
+                  Object {
+                    "Ref": "myURLShortenerBasicTable1FB65ADF",
+                  },
+                  "\\",\\"Key\\":{\\"id\\":{\\"S\\":\\"$input.params('id')\\"}},\\"UpdateExpression\\":\\"set clicks = clicks + :num, last_click_ts = :rt\\",\\"ConditionExpression\\":\\"attribute_exists(id)\\",\\"ProjectionExpression\\":\\"id, url\\",\\"ExpressionAttributeValues\\":{\\":num\\":{\\"N\\":\\"1\\"},\\":rt\\":{\\"N\\":\\"$context.requestTimeEpoch\\"}},\\"ReturnValues\\":\\"ALL_NEW\\"}",
+                ],
+              ],
+            },
+          },
+          "Type": "AWS",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":dynamodb:action/UpdateItem",
+              ],
+            ],
+          },
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Content-Type": true,
+              "method.response.header.Location": true,
+            },
+            "StatusCode": "301",
+          },
+          Object {
+            "StatusCode": "404",
+          },
+        ],
+        "ResourceId": Object {
+          "Ref": "myURLShortenerBasicApiid2BE2C0C9",
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerBasicApiA0BF566D",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "myURLShortenerBasicApivalidatorB109FC69": Object {
+      "Properties": Object {
+        "RestApiId": Object {
+          "Ref": "myURLShortenerBasicApiA0BF566D",
+        },
+        "ValidateRequestBody": true,
+      },
+      "Type": "AWS::ApiGateway::RequestValidator",
+    },
+    "myURLShortenerBasicFunctionB99DCDA0": Object {
+      "DependsOn": Array [
+        "myURLShortenerBasicFunctionServiceRoleDefaultPolicy2A058D92",
+        "myURLShortenerBasicFunctionServiceRoleF7AAFDDD",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3Bucket46CAA9D9",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3VersionKey04669B18",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3VersionKey04669B18",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "KEY_NAME": "id",
+            "TABLE_NAME": Object {
+              "Ref": "myURLShortenerBasicTable1FB65ADF",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerBasicFunctionServiceRoleF7AAFDDD",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "myURLShortenerBasicFunctionServiceRoleDefaultPolicy2A058D92": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+              ],
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "myURLShortenerBasicTable1FB65ADF",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Ref": "AWS::NoValue",
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "myURLShortenerBasicFunctionServiceRoleDefaultPolicy2A058D92",
+        "Roles": Array [
+          Object {
+            "Ref": "myURLShortenerBasicFunctionServiceRoleF7AAFDDD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "myURLShortenerBasicFunctionServiceRoleF7AAFDDD": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "myURLShortenerBasicRole362A7CC1": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Policies": Array [
+          Object {
+            "PolicyDocument": Object {
+              "Statement": Array [
+                Object {
+                  "Action": "dynamodb:UpdateItem",
+                  "Effect": "Allow",
+                  "Resource": Object {
+                    "Fn::GetAtt": Array [
+                      "myURLShortenerBasicTable1FB65ADF",
+                      "Arn",
+                    ],
+                  },
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "APIGatewayDynamoDBUpdateItem",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "myURLShortenerBasicTable1FB65ADF": Object {
+      "DeletionPolicy": "Retain",
+      "Properties": Object {
+        "AttributeDefinitions": Array [
+          Object {
+            "AttributeName": "id",
+            "AttributeType": "S",
+          },
+        ],
+        "KeySchema": Array [
+          Object {
+            "AttributeName": "id",
+            "KeyType": "HASH",
+          },
+        ],
+        "ProvisionedThroughput": Object {
+          "ReadCapacityUnits": 5,
+          "WriteCapacityUnits": 5,
+        },
+      },
+      "Type": "AWS::DynamoDB::Table",
+      "UpdateReplacePolicy": "Retain",
+    },
+  },
+}
+`;
+
+exports[`custom domain 1`] = `
+Object {
+  "Outputs": Object {
+    "myURLShortenerCustomDomainApiEndpoint7CBEB915": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "myURLShortenerCustomDomainApi2513FE07",
+            },
+            ".execute-api.",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            ".",
+            Object {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            Object {
+              "Ref": "myURLShortenerCustomDomainApiDeploymentStageprodC196B750",
+            },
+            "/",
+          ],
+        ],
+      },
+    },
+    "myURLShortenerCustomDomainApiKeyURL382D94F2": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://console.aws.amazon.com/apigateway/home?region=",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            "#/api-keys/",
+            Object {
+              "Ref": "myURLShortenerCustomDomainApiApiKey3EBFC429",
+            },
+          ],
+        ],
+      },
+    },
+    "myURLShortenerCustomDomainCustomDomainApiEndpointa9976824BE85FE": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "myURLShortenerCustomDomainAliasRecorda99768DC4E9836",
+            },
+          ],
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "AssetParameters19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2ArtifactHash652C125C": Object {
+      "Description": "Artifact hash for asset \\"19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2\\"",
+      "Type": "String",
+    },
+    "AssetParameters19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2S3BucketFCCD3A76": Object {
+      "Description": "S3 bucket for asset \\"19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2\\"",
+      "Type": "String",
+    },
+    "AssetParameters19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2S3VersionKey07AF06B6": Object {
+      "Description": "S3 key for asset version \\"19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2\\"",
+      "Type": "String",
+    },
+    "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bArtifactHash47AA4A68": Object {
+      "Description": "Artifact hash for asset \\"f7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0b\\"",
+      "Type": "String",
+    },
+    "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3Bucket46CAA9D9": Object {
+      "Description": "S3 bucket for asset \\"f7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0b\\"",
+      "Type": "String",
+    },
+    "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3VersionKey04669B18": Object {
+      "Description": "S3 key for asset version \\"f7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0b\\"",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "myURLShortenerCustomDomainAliasRecorda99768DC4E9836": Object {
+      "Properties": Object {
+        "AliasTarget": Object {
+          "DNSName": Object {
+            "Fn::GetAtt": Array [
+              "myURLShortenerCustomDomainDomainNamea9976851593D30",
+              "RegionalDomainName",
+            ],
+          },
+          "HostedZoneId": Object {
+            "Fn::GetAtt": Array [
+              "myURLShortenerCustomDomainDomainNamea9976851593D30",
+              "RegionalHostedZoneId",
+            ],
+          },
+        },
+        "HostedZoneId": "fakeZoneId",
+        "Name": "subdomain.mydomain.com.",
+        "Type": "A",
+      },
+      "Type": "AWS::Route53::RecordSet",
+    },
+    "myURLShortenerCustomDomainApi2513FE07": Object {
+      "Properties": Object {
+        "Name": "myURLShortenerCustomDomain-URLShortener-Api",
+      },
+      "Type": "AWS::ApiGateway::RestApi",
+    },
+    "myURLShortenerCustomDomainApiAccount40369CE6": Object {
+      "DependsOn": Array [
+        "myURLShortenerCustomDomainApi2513FE07",
+      ],
+      "Properties": Object {
+        "CloudWatchRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainApiCloudWatchRoleB709B95A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ApiGateway::Account",
+    },
+    "myURLShortenerCustomDomainApiApiKey3EBFC429": Object {
+      "Properties": Object {
+        "Enabled": true,
+        "Name": "Default-URLShortener-ApiKey",
+        "StageKeys": Array [
+          Object {
+            "RestApiId": Object {
+              "Ref": "myURLShortenerCustomDomainApi2513FE07",
+            },
+            "StageName": Object {
+              "Ref": "myURLShortenerCustomDomainApiDeploymentStageprodC196B750",
+            },
+          },
+        ],
+      },
+      "Type": "AWS::ApiGateway::ApiKey",
+    },
+    "myURLShortenerCustomDomainApiCloudWatchRoleB709B95A": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "myURLShortenerCustomDomainApiDeploymentC144328C6a27a8ba94ccb8d1501dd92f9e13a5fc": Object {
+      "DependsOn": Array [
+        "myURLShortenerCustomDomainApiidGET3B13D6DF",
+        "myURLShortenerCustomDomainApiid2E35EE46",
+        "myURLShortenerCustomDomainApiGET794613BF",
+        "myURLShortenerCustomDomainApiPOST42DCE2F9",
+        "myURLShortenerCustomDomainApiValidationModel204C614C",
+        "myURLShortenerCustomDomainApivalidator3DFBEB06",
+      ],
+      "Properties": Object {
+        "Description": "Automatically created by the RestApi construct",
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomainApi2513FE07",
+        },
+      },
+      "Type": "AWS::ApiGateway::Deployment",
+    },
+    "myURLShortenerCustomDomainApiDeploymentStageprodC196B750": Object {
+      "Properties": Object {
+        "DeploymentId": Object {
+          "Ref": "myURLShortenerCustomDomainApiDeploymentC144328C6a27a8ba94ccb8d1501dd92f9e13a5fc",
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomainApi2513FE07",
+        },
+        "StageName": "prod",
+      },
+      "Type": "AWS::ApiGateway::Stage",
+    },
+    "myURLShortenerCustomDomainApiGET794613BF": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseTemplates": Object {
+                "text/html": "Not Found",
+              },
+              "StatusCode": "404",
+            },
+          ],
+          "PassthroughBehavior": "WHEN_NO_TEMPLATES",
+          "RequestTemplates": Object {
+            "application/json": "{\\"statusCode\\":404}",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Content-Type": true,
+              "method.response.header.Location": true,
+            },
+            "StatusCode": "301",
+          },
+          Object {
+            "StatusCode": "404",
+          },
+        ],
+        "ResourceId": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainApi2513FE07",
+            "RootResourceId",
+          ],
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomainApi2513FE07",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "myURLShortenerCustomDomainApiPOST42DCE2F9": Object {
+      "Properties": Object {
+        "ApiKeyRequired": true,
+        "AuthorizationType": "NONE",
+        "HttpMethod": "POST",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "myURLShortenerCustomDomainFunction60CF0466",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "RequestModels": Object {
+          "application/json": Object {
+            "Ref": "myURLShortenerCustomDomainApiValidationModel204C614C",
+          },
+        },
+        "RequestParameters": Object {
+          "method.request.header.Content-Type": true,
+        },
+        "RequestValidatorId": Object {
+          "Ref": "myURLShortenerCustomDomainApivalidator3DFBEB06",
+        },
+        "ResourceId": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainApi2513FE07",
+            "RootResourceId",
+          ],
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomainApi2513FE07",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "myURLShortenerCustomDomainApiPOSTApiPermissionTestmyURLShortenerCustomDomainApi77F5D749POSTAD28820A": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainFunction60CF0466",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "myURLShortenerCustomDomainApi2513FE07",
+              },
+              "/test-invoke-stage/POST/",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "myURLShortenerCustomDomainApiPOSTApiPermissionmyURLShortenerCustomDomainApi77F5D749POSTC885F3D0": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainFunction60CF0466",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "myURLShortenerCustomDomainApi2513FE07",
+              },
+              "/",
+              Object {
+                "Ref": "myURLShortenerCustomDomainApiDeploymentStageprodC196B750",
+              },
+              "/POST/",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "myURLShortenerCustomDomainApiUsagePlan65A091D8": Object {
+      "Properties": Object {
+        "ApiStages": Array [
+          Object {
+            "ApiId": Object {
+              "Ref": "myURLShortenerCustomDomainApi2513FE07",
+            },
+            "Stage": Object {
+              "Ref": "myURLShortenerCustomDomainApiDeploymentStageprodC196B750",
+            },
+            "Throttle": Object {},
+          },
+        ],
+        "Description": "Usage plan for Default url shortener api",
+        "UsagePlanName": "Default-URLShortener-UsagePlan",
+      },
+      "Type": "AWS::ApiGateway::UsagePlan",
+    },
+    "myURLShortenerCustomDomainApiUsagePlanUsagePlanKeyResource6EA225F2": Object {
+      "Properties": Object {
+        "KeyId": Object {
+          "Ref": "myURLShortenerCustomDomainApiApiKey3EBFC429",
+        },
+        "KeyType": "API_KEY",
+        "UsagePlanId": Object {
+          "Ref": "myURLShortenerCustomDomainApiUsagePlan65A091D8",
+        },
+      },
+      "Type": "AWS::ApiGateway::UsagePlanKey",
+    },
+    "myURLShortenerCustomDomainApiValidationModel204C614C": Object {
+      "Properties": Object {
+        "ContentType": "application/json",
+        "Name": "ValidationModel",
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomainApi2513FE07",
+        },
+        "Schema": Object {
+          "$schema": "http://json-schema.org/draft-04/schema#",
+          "properties": Object {
+            "url": Object {
+              "format": "uri",
+              "pattern": "^https?://",
+              "type": "string",
+            },
+          },
+          "required": Array [
+            "url",
+          ],
+          "type": "object",
+        },
+      },
+      "Type": "AWS::ApiGateway::Model",
+    },
+    "myURLShortenerCustomDomainApiid2E35EE46": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainApi2513FE07",
+            "RootResourceId",
+          ],
+        },
+        "PathPart": "{id}",
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomainApi2513FE07",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "myURLShortenerCustomDomainApiidGET3B13D6DF": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "Credentials": Object {
+            "Fn::GetAtt": Array [
+              "myURLShortenerCustomDomainRole6E9D3202",
+              "Arn",
+            ],
+          },
+          "IntegrationHttpMethod": "POST",
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Content-Type": "'text/html; charset=UTF-8'",
+                "method.response.header.Location": "integration.response.body.Attributes.url.S",
+              },
+              "ResponseTemplates": Object {
+                "text/html; charset=UTF-8": "#if($input.path('$.Attributes.url.S').isEmpty() == false)#set($url = $input.path('$.Attributes.url.S'))#set($context.responseOverride.header.Location = $url)<!DOCTYPE html><html><head><meta charset=\\"UTF-8\\" /><meta http-equiv=\\"refresh\\" content=\\"0;url=$url\\" /><title>Redirecting to $url</title></head><body>Redirecting to <a href=\\"$url\\">$url</a>.</body></html>#else#set($context.responseOverride.status = 404)#end",
+              },
+              "SelectionPattern": "200",
+              "StatusCode": "301",
+            },
+            Object {
+              "ResponseTemplates": Object {
+                "text/html": "Not Found",
+              },
+              "StatusCode": "404",
+            },
+          ],
+          "PassthroughBehavior": "WHEN_NO_TEMPLATES",
+          "RequestTemplates": Object {
+            "application/json": Object {
+              "Fn::Join": Array [
+                "",
+                Array [
+                  "{\\"TableName\\":\\"",
+                  Object {
+                    "Ref": "myURLShortenerCustomDomainTable4AC6FD48",
+                  },
+                  "\\",\\"Key\\":{\\"id\\":{\\"S\\":\\"$input.params('id')\\"}},\\"UpdateExpression\\":\\"set clicks = clicks + :num, last_click_ts = :rt\\",\\"ConditionExpression\\":\\"attribute_exists(id)\\",\\"ProjectionExpression\\":\\"id, url\\",\\"ExpressionAttributeValues\\":{\\":num\\":{\\"N\\":\\"1\\"},\\":rt\\":{\\"N\\":\\"$context.requestTimeEpoch\\"}},\\"ReturnValues\\":\\"ALL_NEW\\"}",
+                ],
+              ],
+            },
+          },
+          "Type": "AWS",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":dynamodb:action/UpdateItem",
+              ],
+            ],
+          },
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Content-Type": true,
+              "method.response.header.Location": true,
+            },
+            "StatusCode": "301",
+          },
+          Object {
+            "StatusCode": "404",
+          },
+        ],
+        "ResourceId": Object {
+          "Ref": "myURLShortenerCustomDomainApiid2E35EE46",
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomainApi2513FE07",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "myURLShortenerCustomDomainApivalidator3DFBEB06": Object {
+      "Properties": Object {
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomainApi2513FE07",
+        },
+        "ValidateRequestBody": true,
+      },
+      "Type": "AWS::ApiGateway::RequestValidator",
+    },
+    "myURLShortenerCustomDomainDnsValidatedCertificatea99768CertificateRequestorFunction61C7292D": Object {
+      "DependsOn": Array [
+        "myURLShortenerCustomDomainDnsValidatedCertificatea99768CertificateRequestorFunctionServiceRoleDefaultPolicyAC696123",
+        "myURLShortenerCustomDomainDnsValidatedCertificatea99768CertificateRequestorFunctionServiceRole04975DBE",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2S3BucketFCCD3A76",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2S3VersionKey07AF06B6",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2S3VersionKey07AF06B6",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Handler": "index.certificateRequestHandler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainDnsValidatedCertificatea99768CertificateRequestorFunctionServiceRole04975DBE",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs10.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "myURLShortenerCustomDomainDnsValidatedCertificatea99768CertificateRequestorFunctionServiceRole04975DBE": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "myURLShortenerCustomDomainDnsValidatedCertificatea99768CertificateRequestorFunctionServiceRoleDefaultPolicyAC696123": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "acm:RequestCertificate",
+                "acm:DescribeCertificate",
+                "acm:DeleteCertificate",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": "route53:GetChange",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": "route53:changeResourceRecordSets",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    "arn:",
+                    Object {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":route53:::hostedzone/fakeZoneId",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "myURLShortenerCustomDomainDnsValidatedCertificatea99768CertificateRequestorFunctionServiceRoleDefaultPolicyAC696123",
+        "Roles": Array [
+          Object {
+            "Ref": "myURLShortenerCustomDomainDnsValidatedCertificatea99768CertificateRequestorFunctionServiceRole04975DBE",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "myURLShortenerCustomDomainDnsValidatedCertificatea99768CertificateRequestorResource18C5952A": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "DomainName": "subdomain.mydomain.com",
+        "HostedZoneId": "fakeZoneId",
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainDnsValidatedCertificatea99768CertificateRequestorFunction61C7292D",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::CloudFormation::CustomResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "myURLShortenerCustomDomainDomainNamea9976851593D30": Object {
+      "Properties": Object {
+        "DomainName": "subdomain.mydomain.com",
+        "EndpointConfiguration": Object {
+          "Types": Array [
+            "REGIONAL",
+          ],
+        },
+        "RegionalCertificateArn": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainDnsValidatedCertificatea99768CertificateRequestorResource18C5952A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ApiGateway::DomainName",
+    },
+    "myURLShortenerCustomDomainDomainNamea99768MapmyURLShortenerCustomDomainApi77F5D7498B0A0F6F": Object {
+      "Properties": Object {
+        "DomainName": Object {
+          "Ref": "myURLShortenerCustomDomainDomainNamea9976851593D30",
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomainApi2513FE07",
+        },
+        "Stage": Object {
+          "Ref": "myURLShortenerCustomDomainApiDeploymentStageprodC196B750",
+        },
+      },
+      "Type": "AWS::ApiGateway::BasePathMapping",
+    },
+    "myURLShortenerCustomDomainFunction60CF0466": Object {
+      "DependsOn": Array [
+        "myURLShortenerCustomDomainFunctionServiceRoleDefaultPolicy5E8506A3",
+        "myURLShortenerCustomDomainFunctionServiceRole25CEC786",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3Bucket46CAA9D9",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3VersionKey04669B18",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3VersionKey04669B18",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "KEY_NAME": "id",
+            "TABLE_NAME": Object {
+              "Ref": "myURLShortenerCustomDomainTable4AC6FD48",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainFunctionServiceRole25CEC786",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "myURLShortenerCustomDomainFunctionServiceRole25CEC786": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "myURLShortenerCustomDomainFunctionServiceRoleDefaultPolicy5E8506A3": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+              ],
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "myURLShortenerCustomDomainTable4AC6FD48",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Ref": "AWS::NoValue",
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "myURLShortenerCustomDomainFunctionServiceRoleDefaultPolicy5E8506A3",
+        "Roles": Array [
+          Object {
+            "Ref": "myURLShortenerCustomDomainFunctionServiceRole25CEC786",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "myURLShortenerCustomDomainRole6E9D3202": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Policies": Array [
+          Object {
+            "PolicyDocument": Object {
+              "Statement": Array [
+                Object {
+                  "Action": "dynamodb:UpdateItem",
+                  "Effect": "Allow",
+                  "Resource": Object {
+                    "Fn::GetAtt": Array [
+                      "myURLShortenerCustomDomainTable4AC6FD48",
+                      "Arn",
+                    ],
+                  },
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "APIGatewayDynamoDBUpdateItem",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "myURLShortenerCustomDomainTable4AC6FD48": Object {
+      "DeletionPolicy": "Retain",
+      "Properties": Object {
+        "AttributeDefinitions": Array [
+          Object {
+            "AttributeName": "id",
+            "AttributeType": "S",
+          },
+        ],
+        "KeySchema": Array [
+          Object {
+            "AttributeName": "id",
+            "KeyType": "HASH",
+          },
+        ],
+        "ProvisionedThroughput": Object {
+          "ReadCapacityUnits": 5,
+          "WriteCapacityUnits": 5,
+        },
+      },
+      "Type": "AWS::DynamoDB::Table",
+      "UpdateReplacePolicy": "Retain",
+    },
+  },
+}
+`;
+
+exports[`custom domain and existing certificate 1`] = `
+Object {
+  "Outputs": Object {
+    "myURLShortenerCustomDomaiCertificateApiEndpointA98FC613": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "myURLShortenerCustomDomaiCertificateApi22A06414",
+            },
+            ".execute-api.",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            ".",
+            Object {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            Object {
+              "Ref": "myURLShortenerCustomDomaiCertificateApiDeploymentStageprod6422A098",
+            },
+            "/",
+          ],
+        ],
+      },
+    },
+    "myURLShortenerCustomDomaiCertificateApiKeyURLE137392A": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://console.aws.amazon.com/apigateway/home?region=",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            "#/api-keys/",
+            Object {
+              "Ref": "myURLShortenerCustomDomaiCertificateApiApiKey1E5D5F35",
+            },
+          ],
+        ],
+      },
+    },
+    "myURLShortenerCustomDomaiCertificateCustomDomainApiEndpoint07d0f053086A63": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "myURLShortenerCustomDomaiCertificateAliasRecord07d0f0AB93CD63",
+            },
+          ],
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bArtifactHash47AA4A68": Object {
+      "Description": "Artifact hash for asset \\"f7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0b\\"",
+      "Type": "String",
+    },
+    "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3Bucket46CAA9D9": Object {
+      "Description": "S3 bucket for asset \\"f7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0b\\"",
+      "Type": "String",
+    },
+    "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3VersionKey04669B18": Object {
+      "Description": "S3 key for asset version \\"f7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0b\\"",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "myURLShortenerCustomDomaiCertificateAliasRecord07d0f0AB93CD63": Object {
+      "Properties": Object {
+        "AliasTarget": Object {
+          "DNSName": Object {
+            "Fn::GetAtt": Array [
+              "myURLShortenerCustomDomaiCertificateDomainName07d0f06CDA5A99",
+              "RegionalDomainName",
+            ],
+          },
+          "HostedZoneId": Object {
+            "Fn::GetAtt": Array [
+              "myURLShortenerCustomDomaiCertificateDomainName07d0f06CDA5A99",
+              "RegionalHostedZoneId",
+            ],
+          },
+        },
+        "HostedZoneId": "fakeZoneId",
+        "Name": "foo.mydomain.com.",
+        "Type": "A",
+      },
+      "Type": "AWS::Route53::RecordSet",
+    },
+    "myURLShortenerCustomDomaiCertificateApi22A06414": Object {
+      "Properties": Object {
+        "Name": "myURLShortenerCustomDomaiCertificate-URLShortener-Api",
+      },
+      "Type": "AWS::ApiGateway::RestApi",
+    },
+    "myURLShortenerCustomDomaiCertificateApiAccount2334FD4D": Object {
+      "DependsOn": Array [
+        "myURLShortenerCustomDomaiCertificateApi22A06414",
+      ],
+      "Properties": Object {
+        "CloudWatchRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomaiCertificateApiCloudWatchRole657382D9",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ApiGateway::Account",
+    },
+    "myURLShortenerCustomDomaiCertificateApiApiKey1E5D5F35": Object {
+      "Properties": Object {
+        "Enabled": true,
+        "Name": "Default-URLShortener-ApiKey",
+        "StageKeys": Array [
+          Object {
+            "RestApiId": Object {
+              "Ref": "myURLShortenerCustomDomaiCertificateApi22A06414",
+            },
+            "StageName": Object {
+              "Ref": "myURLShortenerCustomDomaiCertificateApiDeploymentStageprod6422A098",
+            },
+          },
+        ],
+      },
+      "Type": "AWS::ApiGateway::ApiKey",
+    },
+    "myURLShortenerCustomDomaiCertificateApiCloudWatchRole657382D9": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "myURLShortenerCustomDomaiCertificateApiDeploymentD857E70A184d76d512d567168a2ed9ff813c7f43": Object {
+      "DependsOn": Array [
+        "myURLShortenerCustomDomaiCertificateApiidGETCCBEFE2D",
+        "myURLShortenerCustomDomaiCertificateApiidD3033767",
+        "myURLShortenerCustomDomaiCertificateApiGET7CBAA1B4",
+        "myURLShortenerCustomDomaiCertificateApiPOSTB626CD2A",
+        "myURLShortenerCustomDomaiCertificateApiValidationModel0AD3A03E",
+        "myURLShortenerCustomDomaiCertificateApivalidator6ED2D3C6",
+      ],
+      "Properties": Object {
+        "Description": "Automatically created by the RestApi construct",
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomaiCertificateApi22A06414",
+        },
+      },
+      "Type": "AWS::ApiGateway::Deployment",
+    },
+    "myURLShortenerCustomDomaiCertificateApiDeploymentStageprod6422A098": Object {
+      "Properties": Object {
+        "DeploymentId": Object {
+          "Ref": "myURLShortenerCustomDomaiCertificateApiDeploymentD857E70A184d76d512d567168a2ed9ff813c7f43",
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomaiCertificateApi22A06414",
+        },
+        "StageName": "prod",
+      },
+      "Type": "AWS::ApiGateway::Stage",
+    },
+    "myURLShortenerCustomDomaiCertificateApiGET7CBAA1B4": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseTemplates": Object {
+                "text/html": "Not Found",
+              },
+              "StatusCode": "404",
+            },
+          ],
+          "PassthroughBehavior": "WHEN_NO_TEMPLATES",
+          "RequestTemplates": Object {
+            "application/json": "{\\"statusCode\\":404}",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Content-Type": true,
+              "method.response.header.Location": true,
+            },
+            "StatusCode": "301",
+          },
+          Object {
+            "StatusCode": "404",
+          },
+        ],
+        "ResourceId": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomaiCertificateApi22A06414",
+            "RootResourceId",
+          ],
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomaiCertificateApi22A06414",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "myURLShortenerCustomDomaiCertificateApiPOSTApiPermissionTestmyURLShortenerCustomDomaiCertificateApi3D43F0D4POST94F629D9": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomaiCertificateFunctionB8B77E7B",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "myURLShortenerCustomDomaiCertificateApi22A06414",
+              },
+              "/test-invoke-stage/POST/",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "myURLShortenerCustomDomaiCertificateApiPOSTApiPermissionmyURLShortenerCustomDomaiCertificateApi3D43F0D4POSTA39B5B95": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomaiCertificateFunctionB8B77E7B",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "myURLShortenerCustomDomaiCertificateApi22A06414",
+              },
+              "/",
+              Object {
+                "Ref": "myURLShortenerCustomDomaiCertificateApiDeploymentStageprod6422A098",
+              },
+              "/POST/",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "myURLShortenerCustomDomaiCertificateApiPOSTB626CD2A": Object {
+      "Properties": Object {
+        "ApiKeyRequired": true,
+        "AuthorizationType": "NONE",
+        "HttpMethod": "POST",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "myURLShortenerCustomDomaiCertificateFunctionB8B77E7B",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "RequestModels": Object {
+          "application/json": Object {
+            "Ref": "myURLShortenerCustomDomaiCertificateApiValidationModel0AD3A03E",
+          },
+        },
+        "RequestParameters": Object {
+          "method.request.header.Content-Type": true,
+        },
+        "RequestValidatorId": Object {
+          "Ref": "myURLShortenerCustomDomaiCertificateApivalidator6ED2D3C6",
+        },
+        "ResourceId": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomaiCertificateApi22A06414",
+            "RootResourceId",
+          ],
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomaiCertificateApi22A06414",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "myURLShortenerCustomDomaiCertificateApiUsagePlan1DD86D33": Object {
+      "Properties": Object {
+        "ApiStages": Array [
+          Object {
+            "ApiId": Object {
+              "Ref": "myURLShortenerCustomDomaiCertificateApi22A06414",
+            },
+            "Stage": Object {
+              "Ref": "myURLShortenerCustomDomaiCertificateApiDeploymentStageprod6422A098",
+            },
+            "Throttle": Object {},
+          },
+        ],
+        "Description": "Usage plan for Default url shortener api",
+        "UsagePlanName": "Default-URLShortener-UsagePlan",
+      },
+      "Type": "AWS::ApiGateway::UsagePlan",
+    },
+    "myURLShortenerCustomDomaiCertificateApiUsagePlanUsagePlanKeyResourceFE8522B8": Object {
+      "Properties": Object {
+        "KeyId": Object {
+          "Ref": "myURLShortenerCustomDomaiCertificateApiApiKey1E5D5F35",
+        },
+        "KeyType": "API_KEY",
+        "UsagePlanId": Object {
+          "Ref": "myURLShortenerCustomDomaiCertificateApiUsagePlan1DD86D33",
+        },
+      },
+      "Type": "AWS::ApiGateway::UsagePlanKey",
+    },
+    "myURLShortenerCustomDomaiCertificateApiValidationModel0AD3A03E": Object {
+      "Properties": Object {
+        "ContentType": "application/json",
+        "Name": "ValidationModel",
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomaiCertificateApi22A06414",
+        },
+        "Schema": Object {
+          "$schema": "http://json-schema.org/draft-04/schema#",
+          "properties": Object {
+            "url": Object {
+              "format": "uri",
+              "pattern": "^https?://",
+              "type": "string",
+            },
+          },
+          "required": Array [
+            "url",
+          ],
+          "type": "object",
+        },
+      },
+      "Type": "AWS::ApiGateway::Model",
+    },
+    "myURLShortenerCustomDomaiCertificateApiidD3033767": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomaiCertificateApi22A06414",
+            "RootResourceId",
+          ],
+        },
+        "PathPart": "{id}",
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomaiCertificateApi22A06414",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "myURLShortenerCustomDomaiCertificateApiidGETCCBEFE2D": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "Credentials": Object {
+            "Fn::GetAtt": Array [
+              "myURLShortenerCustomDomaiCertificateRole1B43BE17",
+              "Arn",
+            ],
+          },
+          "IntegrationHttpMethod": "POST",
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Content-Type": "'text/html; charset=UTF-8'",
+                "method.response.header.Location": "integration.response.body.Attributes.url.S",
+              },
+              "ResponseTemplates": Object {
+                "text/html; charset=UTF-8": "#if($input.path('$.Attributes.url.S').isEmpty() == false)#set($url = $input.path('$.Attributes.url.S'))#set($context.responseOverride.header.Location = $url)<!DOCTYPE html><html><head><meta charset=\\"UTF-8\\" /><meta http-equiv=\\"refresh\\" content=\\"0;url=$url\\" /><title>Redirecting to $url</title></head><body>Redirecting to <a href=\\"$url\\">$url</a>.</body></html>#else#set($context.responseOverride.status = 404)#end",
+              },
+              "SelectionPattern": "200",
+              "StatusCode": "301",
+            },
+            Object {
+              "ResponseTemplates": Object {
+                "text/html": "Not Found",
+              },
+              "StatusCode": "404",
+            },
+          ],
+          "PassthroughBehavior": "WHEN_NO_TEMPLATES",
+          "RequestTemplates": Object {
+            "application/json": Object {
+              "Fn::Join": Array [
+                "",
+                Array [
+                  "{\\"TableName\\":\\"",
+                  Object {
+                    "Ref": "myURLShortenerCustomDomaiCertificateTable32F51AF8",
+                  },
+                  "\\",\\"Key\\":{\\"id\\":{\\"S\\":\\"$input.params('id')\\"}},\\"UpdateExpression\\":\\"set clicks = clicks + :num, last_click_ts = :rt\\",\\"ConditionExpression\\":\\"attribute_exists(id)\\",\\"ProjectionExpression\\":\\"id, url\\",\\"ExpressionAttributeValues\\":{\\":num\\":{\\"N\\":\\"1\\"},\\":rt\\":{\\"N\\":\\"$context.requestTimeEpoch\\"}},\\"ReturnValues\\":\\"ALL_NEW\\"}",
+                ],
+              ],
+            },
+          },
+          "Type": "AWS",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":dynamodb:action/UpdateItem",
+              ],
+            ],
+          },
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Content-Type": true,
+              "method.response.header.Location": true,
+            },
+            "StatusCode": "301",
+          },
+          Object {
+            "StatusCode": "404",
+          },
+        ],
+        "ResourceId": Object {
+          "Ref": "myURLShortenerCustomDomaiCertificateApiidD3033767",
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomaiCertificateApi22A06414",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "myURLShortenerCustomDomaiCertificateApivalidator6ED2D3C6": Object {
+      "Properties": Object {
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomaiCertificateApi22A06414",
+        },
+        "ValidateRequestBody": true,
+      },
+      "Type": "AWS::ApiGateway::RequestValidator",
+    },
+    "myURLShortenerCustomDomaiCertificateDomainName07d0f06CDA5A99": Object {
+      "Properties": Object {
+        "DomainName": "foo.mydomain.com",
+        "EndpointConfiguration": Object {
+          "Types": Array [
+            "REGIONAL",
+          ],
+        },
+        "RegionalCertificateArn": "arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012",
+      },
+      "Type": "AWS::ApiGateway::DomainName",
+    },
+    "myURLShortenerCustomDomaiCertificateDomainName07d0f0MapmyURLShortenerCustomDomaiCertificateApi3D43F0D4044008BC": Object {
+      "Properties": Object {
+        "DomainName": Object {
+          "Ref": "myURLShortenerCustomDomaiCertificateDomainName07d0f06CDA5A99",
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomaiCertificateApi22A06414",
+        },
+        "Stage": Object {
+          "Ref": "myURLShortenerCustomDomaiCertificateApiDeploymentStageprod6422A098",
+        },
+      },
+      "Type": "AWS::ApiGateway::BasePathMapping",
+    },
+    "myURLShortenerCustomDomaiCertificateFunctionB8B77E7B": Object {
+      "DependsOn": Array [
+        "myURLShortenerCustomDomaiCertificateFunctionServiceRoleDefaultPolicyFF789ED6",
+        "myURLShortenerCustomDomaiCertificateFunctionServiceRole3DF7006A",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3Bucket46CAA9D9",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3VersionKey04669B18",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3VersionKey04669B18",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "KEY_NAME": "id",
+            "TABLE_NAME": Object {
+              "Ref": "myURLShortenerCustomDomaiCertificateTable32F51AF8",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomaiCertificateFunctionServiceRole3DF7006A",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "myURLShortenerCustomDomaiCertificateFunctionServiceRole3DF7006A": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "myURLShortenerCustomDomaiCertificateFunctionServiceRoleDefaultPolicyFF789ED6": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+              ],
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "myURLShortenerCustomDomaiCertificateTable32F51AF8",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Ref": "AWS::NoValue",
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "myURLShortenerCustomDomaiCertificateFunctionServiceRoleDefaultPolicyFF789ED6",
+        "Roles": Array [
+          Object {
+            "Ref": "myURLShortenerCustomDomaiCertificateFunctionServiceRole3DF7006A",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "myURLShortenerCustomDomaiCertificateRole1B43BE17": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Policies": Array [
+          Object {
+            "PolicyDocument": Object {
+              "Statement": Array [
+                Object {
+                  "Action": "dynamodb:UpdateItem",
+                  "Effect": "Allow",
+                  "Resource": Object {
+                    "Fn::GetAtt": Array [
+                      "myURLShortenerCustomDomaiCertificateTable32F51AF8",
+                      "Arn",
+                    ],
+                  },
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "APIGatewayDynamoDBUpdateItem",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "myURLShortenerCustomDomaiCertificateTable32F51AF8": Object {
+      "DeletionPolicy": "Retain",
+      "Properties": Object {
+        "AttributeDefinitions": Array [
+          Object {
+            "AttributeName": "id",
+            "AttributeType": "S",
+          },
+        ],
+        "KeySchema": Array [
+          Object {
+            "AttributeName": "id",
+            "KeyType": "HASH",
+          },
+        ],
+        "ProvisionedThroughput": Object {
+          "ReadCapacityUnits": 5,
+          "WriteCapacityUnits": 5,
+        },
+      },
+      "Type": "AWS::DynamoDB::Table",
+      "UpdateReplacePolicy": "Retain",
+    },
+  },
+}
+`;
+
+exports[`dynamodb stream 1`] = `
+Object {
+  "Outputs": Object {
+    "myURLShortenerDynamoStreamApiEndpoint0BE6A42F": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "myURLShortenerDynamoStreamApi5830ACCD",
+            },
+            ".execute-api.",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            ".",
+            Object {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            Object {
+              "Ref": "myURLShortenerDynamoStreamApiDeploymentStageprod71018D62",
+            },
+            "/",
+          ],
+        ],
+      },
+    },
+    "myURLShortenerDynamoStreamApiKeyURL3760A7B9": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://console.aws.amazon.com/apigateway/home?region=",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            "#/api-keys/",
+            Object {
+              "Ref": "myURLShortenerDynamoStreamApiApiKey29BBA2E2",
+            },
+          ],
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bArtifactHash47AA4A68": Object {
+      "Description": "Artifact hash for asset \\"f7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0b\\"",
+      "Type": "String",
+    },
+    "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3Bucket46CAA9D9": Object {
+      "Description": "S3 bucket for asset \\"f7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0b\\"",
+      "Type": "String",
+    },
+    "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3VersionKey04669B18": Object {
+      "Description": "S3 key for asset version \\"f7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0b\\"",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "Function76856677": Object {
+      "DependsOn": Array [
+        "FunctionServiceRoleDefaultPolicy2F49994A",
+        "FunctionServiceRole675BB04A",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "ZipFile": "'use strict';
+exports.handler = async (event) => {
+  console.log('Received event:', JSON.stringify(event, null, 2));
+  for (const record of event.Records) {
+    console.log(record.eventID);
+    console.log(record.eventName);
+    console.log('DynamoDB Record: %j', record.dynamodb);
+  }
+  console.log(\`Successfully processed \${event.Records.length} records.\`);
+};",
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "FunctionServiceRole675BB04A",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "FunctionDynamoDBEventSourceTableE746EDAE": Object {
+      "Properties": Object {
+        "BatchSize": 100,
+        "EventSourceArn": Object {
+          "Fn::GetAtt": Array [
+            "TableCD117FA1",
+            "StreamArn",
+          ],
+        },
+        "FunctionName": Object {
+          "Ref": "Function76856677",
+        },
+        "StartingPosition": "TRIM_HORIZON",
+      },
+      "Type": "AWS::Lambda::EventSourceMapping",
+    },
+    "FunctionServiceRole675BB04A": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "FunctionServiceRoleDefaultPolicy2F49994A": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "dynamodb:ListStreams",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    Object {
+                      "Fn::GetAtt": Array [
+                        "TableCD117FA1",
+                        "Arn",
+                      ],
+                    },
+                    "/stream/*",
+                  ],
+                ],
+              },
+            },
+            Object {
+              "Action": Array [
+                "dynamodb:DescribeStream",
+                "dynamodb:GetRecords",
+                "dynamodb:GetShardIterator",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::GetAtt": Array [
+                  "TableCD117FA1",
+                  "StreamArn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "FunctionServiceRoleDefaultPolicy2F49994A",
+        "Roles": Array [
+          Object {
+            "Ref": "FunctionServiceRole675BB04A",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "TableCD117FA1": Object {
+      "DeletionPolicy": "Retain",
+      "Properties": Object {
+        "AttributeDefinitions": Array [
+          Object {
+            "AttributeName": "foobar",
+            "AttributeType": "S",
+          },
+        ],
+        "KeySchema": Array [
+          Object {
+            "AttributeName": "foobar",
+            "KeyType": "HASH",
+          },
+        ],
+        "ProvisionedThroughput": Object {
+          "ReadCapacityUnits": 5,
+          "WriteCapacityUnits": 5,
+        },
+        "StreamSpecification": Object {
+          "StreamViewType": "NEW_AND_OLD_IMAGES",
+        },
+      },
+      "Type": "AWS::DynamoDB::Table",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "myURLShortenerDynamoStreamApi5830ACCD": Object {
+      "Properties": Object {
+        "Name": "myURLShortenerDynamoStream-URLShortener-Api",
+      },
+      "Type": "AWS::ApiGateway::RestApi",
+    },
+    "myURLShortenerDynamoStreamApiAccount3786BE3B": Object {
+      "DependsOn": Array [
+        "myURLShortenerDynamoStreamApi5830ACCD",
+      ],
+      "Properties": Object {
+        "CloudWatchRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerDynamoStreamApiCloudWatchRole13423505",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ApiGateway::Account",
+    },
+    "myURLShortenerDynamoStreamApiApiKey29BBA2E2": Object {
+      "Properties": Object {
+        "Enabled": true,
+        "Name": "Default-URLShortener-ApiKey",
+        "StageKeys": Array [
+          Object {
+            "RestApiId": Object {
+              "Ref": "myURLShortenerDynamoStreamApi5830ACCD",
+            },
+            "StageName": Object {
+              "Ref": "myURLShortenerDynamoStreamApiDeploymentStageprod71018D62",
+            },
+          },
+        ],
+      },
+      "Type": "AWS::ApiGateway::ApiKey",
+    },
+    "myURLShortenerDynamoStreamApiCloudWatchRole13423505": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "myURLShortenerDynamoStreamApiDeploymentBCAC33271cb7144df6e90eae399d9b7b25679885": Object {
+      "DependsOn": Array [
+        "myURLShortenerDynamoStreamApiidGETD56E1B08",
+        "myURLShortenerDynamoStreamApiidBAD2F890",
+        "myURLShortenerDynamoStreamApiGET4CA4225D",
+        "myURLShortenerDynamoStreamApiPOST72F0F291",
+        "myURLShortenerDynamoStreamApiValidationModel697A281C",
+        "myURLShortenerDynamoStreamApivalidator6E3071E1",
+      ],
+      "Properties": Object {
+        "Description": "Automatically created by the RestApi construct",
+        "RestApiId": Object {
+          "Ref": "myURLShortenerDynamoStreamApi5830ACCD",
+        },
+      },
+      "Type": "AWS::ApiGateway::Deployment",
+    },
+    "myURLShortenerDynamoStreamApiDeploymentStageprod71018D62": Object {
+      "Properties": Object {
+        "DeploymentId": Object {
+          "Ref": "myURLShortenerDynamoStreamApiDeploymentBCAC33271cb7144df6e90eae399d9b7b25679885",
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerDynamoStreamApi5830ACCD",
+        },
+        "StageName": "prod",
+      },
+      "Type": "AWS::ApiGateway::Stage",
+    },
+    "myURLShortenerDynamoStreamApiGET4CA4225D": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseTemplates": Object {
+                "text/html": "Not Found",
+              },
+              "StatusCode": "404",
+            },
+          ],
+          "PassthroughBehavior": "WHEN_NO_TEMPLATES",
+          "RequestTemplates": Object {
+            "application/json": "{\\"statusCode\\":404}",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Content-Type": true,
+              "method.response.header.Location": true,
+            },
+            "StatusCode": "301",
+          },
+          Object {
+            "StatusCode": "404",
+          },
+        ],
+        "ResourceId": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerDynamoStreamApi5830ACCD",
+            "RootResourceId",
+          ],
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerDynamoStreamApi5830ACCD",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "myURLShortenerDynamoStreamApiPOST72F0F291": Object {
+      "Properties": Object {
+        "ApiKeyRequired": true,
+        "AuthorizationType": "NONE",
+        "HttpMethod": "POST",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "myURLShortenerDynamoStreamFunction9D110A07",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "RequestModels": Object {
+          "application/json": Object {
+            "Ref": "myURLShortenerDynamoStreamApiValidationModel697A281C",
+          },
+        },
+        "RequestParameters": Object {
+          "method.request.header.Content-Type": true,
+        },
+        "RequestValidatorId": Object {
+          "Ref": "myURLShortenerDynamoStreamApivalidator6E3071E1",
+        },
+        "ResourceId": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerDynamoStreamApi5830ACCD",
+            "RootResourceId",
+          ],
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerDynamoStreamApi5830ACCD",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "myURLShortenerDynamoStreamApiPOSTApiPermissionTestmyURLShortenerDynamoStreamApi653E2CC6POSTC7E51941": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerDynamoStreamFunction9D110A07",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "myURLShortenerDynamoStreamApi5830ACCD",
+              },
+              "/test-invoke-stage/POST/",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "myURLShortenerDynamoStreamApiPOSTApiPermissionmyURLShortenerDynamoStreamApi653E2CC6POSTC2762E1F": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerDynamoStreamFunction9D110A07",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "myURLShortenerDynamoStreamApi5830ACCD",
+              },
+              "/",
+              Object {
+                "Ref": "myURLShortenerDynamoStreamApiDeploymentStageprod71018D62",
+              },
+              "/POST/",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "myURLShortenerDynamoStreamApiUsagePlanD426B8BF": Object {
+      "Properties": Object {
+        "ApiStages": Array [
+          Object {
+            "ApiId": Object {
+              "Ref": "myURLShortenerDynamoStreamApi5830ACCD",
+            },
+            "Stage": Object {
+              "Ref": "myURLShortenerDynamoStreamApiDeploymentStageprod71018D62",
+            },
+            "Throttle": Object {},
+          },
+        ],
+        "Description": "Usage plan for Default url shortener api",
+        "UsagePlanName": "Default-URLShortener-UsagePlan",
+      },
+      "Type": "AWS::ApiGateway::UsagePlan",
+    },
+    "myURLShortenerDynamoStreamApiUsagePlanUsagePlanKeyResourceF4914079": Object {
+      "Properties": Object {
+        "KeyId": Object {
+          "Ref": "myURLShortenerDynamoStreamApiApiKey29BBA2E2",
+        },
+        "KeyType": "API_KEY",
+        "UsagePlanId": Object {
+          "Ref": "myURLShortenerDynamoStreamApiUsagePlanD426B8BF",
+        },
+      },
+      "Type": "AWS::ApiGateway::UsagePlanKey",
+    },
+    "myURLShortenerDynamoStreamApiValidationModel697A281C": Object {
+      "Properties": Object {
+        "ContentType": "application/json",
+        "Name": "ValidationModel",
+        "RestApiId": Object {
+          "Ref": "myURLShortenerDynamoStreamApi5830ACCD",
+        },
+        "Schema": Object {
+          "$schema": "http://json-schema.org/draft-04/schema#",
+          "properties": Object {
+            "url": Object {
+              "format": "uri",
+              "pattern": "^https?://",
+              "type": "string",
+            },
+          },
+          "required": Array [
+            "url",
+          ],
+          "type": "object",
+        },
+      },
+      "Type": "AWS::ApiGateway::Model",
+    },
+    "myURLShortenerDynamoStreamApiidBAD2F890": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerDynamoStreamApi5830ACCD",
+            "RootResourceId",
+          ],
+        },
+        "PathPart": "{id}",
+        "RestApiId": Object {
+          "Ref": "myURLShortenerDynamoStreamApi5830ACCD",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "myURLShortenerDynamoStreamApiidGETD56E1B08": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "Credentials": Object {
+            "Fn::GetAtt": Array [
+              "myURLShortenerDynamoStreamRole3C1EF540",
+              "Arn",
+            ],
+          },
+          "IntegrationHttpMethod": "POST",
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Content-Type": "'text/html; charset=UTF-8'",
+                "method.response.header.Location": "integration.response.body.Attributes.url.S",
+              },
+              "ResponseTemplates": Object {
+                "text/html; charset=UTF-8": "#if($input.path('$.Attributes.url.S').isEmpty() == false)#set($url = $input.path('$.Attributes.url.S'))#set($context.responseOverride.header.Location = $url)<!DOCTYPE html><html><head><meta charset=\\"UTF-8\\" /><meta http-equiv=\\"refresh\\" content=\\"0;url=$url\\" /><title>Redirecting to $url</title></head><body>Redirecting to <a href=\\"$url\\">$url</a>.</body></html>#else#set($context.responseOverride.status = 404)#end",
+              },
+              "SelectionPattern": "200",
+              "StatusCode": "301",
+            },
+            Object {
+              "ResponseTemplates": Object {
+                "text/html": "Not Found",
+              },
+              "StatusCode": "404",
+            },
+          ],
+          "PassthroughBehavior": "WHEN_NO_TEMPLATES",
+          "RequestTemplates": Object {
+            "application/json": Object {
+              "Fn::Join": Array [
+                "",
+                Array [
+                  "{\\"TableName\\":\\"",
+                  Object {
+                    "Ref": "TableCD117FA1",
+                  },
+                  "\\",\\"Key\\":{\\"foobar\\":{\\"S\\":\\"$input.params('id')\\"}},\\"UpdateExpression\\":\\"set clicks = clicks + :num, last_click_ts = :rt\\",\\"ConditionExpression\\":\\"attribute_exists(foobar)\\",\\"ProjectionExpression\\":\\"foobar, url\\",\\"ExpressionAttributeValues\\":{\\":num\\":{\\"N\\":\\"1\\"},\\":rt\\":{\\"N\\":\\"$context.requestTimeEpoch\\"}},\\"ReturnValues\\":\\"ALL_NEW\\"}",
+                ],
+              ],
+            },
+          },
+          "Type": "AWS",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":dynamodb:action/UpdateItem",
+              ],
+            ],
+          },
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Content-Type": true,
+              "method.response.header.Location": true,
+            },
+            "StatusCode": "301",
+          },
+          Object {
+            "StatusCode": "404",
+          },
+        ],
+        "ResourceId": Object {
+          "Ref": "myURLShortenerDynamoStreamApiidBAD2F890",
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerDynamoStreamApi5830ACCD",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "myURLShortenerDynamoStreamApivalidator6E3071E1": Object {
+      "Properties": Object {
+        "RestApiId": Object {
+          "Ref": "myURLShortenerDynamoStreamApi5830ACCD",
+        },
+        "ValidateRequestBody": true,
+      },
+      "Type": "AWS::ApiGateway::RequestValidator",
+    },
+    "myURLShortenerDynamoStreamFunction9D110A07": Object {
+      "DependsOn": Array [
+        "myURLShortenerDynamoStreamFunctionServiceRoleDefaultPolicy00AFF328",
+        "myURLShortenerDynamoStreamFunctionServiceRole1926C320",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3Bucket46CAA9D9",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3VersionKey04669B18",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3VersionKey04669B18",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "KEY_NAME": "foobar",
+            "TABLE_NAME": Object {
+              "Ref": "TableCD117FA1",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerDynamoStreamFunctionServiceRole1926C320",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "myURLShortenerDynamoStreamFunctionServiceRole1926C320": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "myURLShortenerDynamoStreamFunctionServiceRoleDefaultPolicy00AFF328": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+              ],
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "TableCD117FA1",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Ref": "AWS::NoValue",
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "myURLShortenerDynamoStreamFunctionServiceRoleDefaultPolicy00AFF328",
+        "Roles": Array [
+          Object {
+            "Ref": "myURLShortenerDynamoStreamFunctionServiceRole1926C320",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "myURLShortenerDynamoStreamRole3C1EF540": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Policies": Array [
+          Object {
+            "PolicyDocument": Object {
+              "Statement": Array [
+                Object {
+                  "Action": "dynamodb:UpdateItem",
+                  "Effect": "Allow",
+                  "Resource": Object {
+                    "Fn::GetAtt": Array [
+                      "TableCD117FA1",
+                      "Arn",
+                    ],
+                  },
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "APIGatewayDynamoDBUpdateItem",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+  },
+}
+`;
+
+exports[`multiple custom domains 1`] = `
+Object {
+  "Outputs": Object {
+    "myURLShortenerCustomDomainsApiEndpointE8324337": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "myURLShortenerCustomDomainsApiB052BC92",
+            },
+            ".execute-api.",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            ".",
+            Object {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            Object {
+              "Ref": "myURLShortenerCustomDomainsApiDeploymentStageprod8707A24D",
+            },
+            "/",
+          ],
+        ],
+      },
+    },
+    "myURLShortenerCustomDomainsApiKeyURLE4837A5D": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://console.aws.amazon.com/apigateway/home?region=",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            "#/api-keys/",
+            Object {
+              "Ref": "myURLShortenerCustomDomainsApiApiKey579C3FD2",
+            },
+          ],
+        ],
+      },
+    },
+    "myURLShortenerCustomDomainsCustomDomainApiEndpoint07d0f050120EA3": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "myURLShortenerCustomDomainsAliasRecord07d0f048ADC1B1",
+            },
+          ],
+        ],
+      },
+    },
+    "myURLShortenerCustomDomainsCustomDomainApiEndpoint11a9edAD9338A1": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "myURLShortenerCustomDomainsAliasRecord11a9ed14227B43",
+            },
+          ],
+        ],
+      },
+    },
+    "myURLShortenerCustomDomainsCustomDomainApiEndpointcbf66dB652608A": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "myURLShortenerCustomDomainsAliasRecordcbf66d7B7DB18F",
+            },
+          ],
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "AssetParameters19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2ArtifactHash652C125C": Object {
+      "Description": "Artifact hash for asset \\"19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2\\"",
+      "Type": "String",
+    },
+    "AssetParameters19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2S3BucketFCCD3A76": Object {
+      "Description": "S3 bucket for asset \\"19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2\\"",
+      "Type": "String",
+    },
+    "AssetParameters19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2S3VersionKey07AF06B6": Object {
+      "Description": "S3 key for asset version \\"19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2\\"",
+      "Type": "String",
+    },
+    "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bArtifactHash47AA4A68": Object {
+      "Description": "Artifact hash for asset \\"f7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0b\\"",
+      "Type": "String",
+    },
+    "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3Bucket46CAA9D9": Object {
+      "Description": "S3 bucket for asset \\"f7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0b\\"",
+      "Type": "String",
+    },
+    "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3VersionKey04669B18": Object {
+      "Description": "S3 key for asset version \\"f7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0b\\"",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "myURLShortenerCustomDomainsAliasRecord07d0f048ADC1B1": Object {
+      "Properties": Object {
+        "AliasTarget": Object {
+          "DNSName": Object {
+            "Fn::GetAtt": Array [
+              "myURLShortenerCustomDomainsDomainName07d0f0BE9E8F82",
+              "RegionalDomainName",
+            ],
+          },
+          "HostedZoneId": Object {
+            "Fn::GetAtt": Array [
+              "myURLShortenerCustomDomainsDomainName07d0f0BE9E8F82",
+              "RegionalHostedZoneId",
+            ],
+          },
+        },
+        "HostedZoneId": "fakeZoneId",
+        "Name": "foo.mydomain.com.",
+        "Type": "A",
+      },
+      "Type": "AWS::Route53::RecordSet",
+    },
+    "myURLShortenerCustomDomainsAliasRecord11a9ed14227B43": Object {
+      "Properties": Object {
+        "AliasTarget": Object {
+          "DNSName": Object {
+            "Fn::GetAtt": Array [
+              "myURLShortenerCustomDomainsDomainName11a9edBF8B86E2",
+              "RegionalDomainName",
+            ],
+          },
+          "HostedZoneId": Object {
+            "Fn::GetAtt": Array [
+              "myURLShortenerCustomDomainsDomainName11a9edBF8B86E2",
+              "RegionalHostedZoneId",
+            ],
+          },
+        },
+        "HostedZoneId": "fakeZoneId",
+        "Name": "mydomain.com.",
+        "Type": "A",
+      },
+      "Type": "AWS::Route53::RecordSet",
+    },
+    "myURLShortenerCustomDomainsAliasRecordcbf66d7B7DB18F": Object {
+      "Properties": Object {
+        "AliasTarget": Object {
+          "DNSName": Object {
+            "Fn::GetAtt": Array [
+              "myURLShortenerCustomDomainsDomainNamecbf66d393054E8",
+              "RegionalDomainName",
+            ],
+          },
+          "HostedZoneId": Object {
+            "Fn::GetAtt": Array [
+              "myURLShortenerCustomDomainsDomainNamecbf66d393054E8",
+              "RegionalHostedZoneId",
+            ],
+          },
+        },
+        "HostedZoneId": "fakeZoneId",
+        "Name": "bar.mydomain.com.",
+        "Type": "A",
+      },
+      "Type": "AWS::Route53::RecordSet",
+    },
+    "myURLShortenerCustomDomainsApiAccount2D3094EE": Object {
+      "DependsOn": Array [
+        "myURLShortenerCustomDomainsApiB052BC92",
+      ],
+      "Properties": Object {
+        "CloudWatchRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainsApiCloudWatchRoleE24A4EE4",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ApiGateway::Account",
+    },
+    "myURLShortenerCustomDomainsApiApiKey579C3FD2": Object {
+      "Properties": Object {
+        "Enabled": true,
+        "Name": "Default-URLShortener-ApiKey",
+        "StageKeys": Array [
+          Object {
+            "RestApiId": Object {
+              "Ref": "myURLShortenerCustomDomainsApiB052BC92",
+            },
+            "StageName": Object {
+              "Ref": "myURLShortenerCustomDomainsApiDeploymentStageprod8707A24D",
+            },
+          },
+        ],
+      },
+      "Type": "AWS::ApiGateway::ApiKey",
+    },
+    "myURLShortenerCustomDomainsApiB052BC92": Object {
+      "Properties": Object {
+        "Name": "myURLShortenerCustomDomains-URLShortener-Api",
+      },
+      "Type": "AWS::ApiGateway::RestApi",
+    },
+    "myURLShortenerCustomDomainsApiCloudWatchRoleE24A4EE4": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "myURLShortenerCustomDomainsApiDeployment0199D26Eaed760cd135973aa4641b48fbc547f23": Object {
+      "DependsOn": Array [
+        "myURLShortenerCustomDomainsApiidGET29A33F93",
+        "myURLShortenerCustomDomainsApiidAE2E8C4C",
+        "myURLShortenerCustomDomainsApiGET7F603756",
+        "myURLShortenerCustomDomainsApiPOST8F3E6DD7",
+        "myURLShortenerCustomDomainsApiValidationModel4DA5AC01",
+        "myURLShortenerCustomDomainsApivalidator9F5437E6",
+      ],
+      "Properties": Object {
+        "Description": "Automatically created by the RestApi construct",
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomainsApiB052BC92",
+        },
+      },
+      "Type": "AWS::ApiGateway::Deployment",
+    },
+    "myURLShortenerCustomDomainsApiDeploymentStageprod8707A24D": Object {
+      "Properties": Object {
+        "DeploymentId": Object {
+          "Ref": "myURLShortenerCustomDomainsApiDeployment0199D26Eaed760cd135973aa4641b48fbc547f23",
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomainsApiB052BC92",
+        },
+        "StageName": "prod",
+      },
+      "Type": "AWS::ApiGateway::Stage",
+    },
+    "myURLShortenerCustomDomainsApiGET7F603756": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseTemplates": Object {
+                "text/html": "Not Found",
+              },
+              "StatusCode": "404",
+            },
+          ],
+          "PassthroughBehavior": "WHEN_NO_TEMPLATES",
+          "RequestTemplates": Object {
+            "application/json": "{\\"statusCode\\":404}",
+          },
+          "Type": "MOCK",
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Content-Type": true,
+              "method.response.header.Location": true,
+            },
+            "StatusCode": "301",
+          },
+          Object {
+            "StatusCode": "404",
+          },
+        ],
+        "ResourceId": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainsApiB052BC92",
+            "RootResourceId",
+          ],
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomainsApiB052BC92",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "myURLShortenerCustomDomainsApiPOST8F3E6DD7": Object {
+      "Properties": Object {
+        "ApiKeyRequired": true,
+        "AuthorizationType": "NONE",
+        "HttpMethod": "POST",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "myURLShortenerCustomDomainsFunction80AEA6B9",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "RequestModels": Object {
+          "application/json": Object {
+            "Ref": "myURLShortenerCustomDomainsApiValidationModel4DA5AC01",
+          },
+        },
+        "RequestParameters": Object {
+          "method.request.header.Content-Type": true,
+        },
+        "RequestValidatorId": Object {
+          "Ref": "myURLShortenerCustomDomainsApivalidator9F5437E6",
+        },
+        "ResourceId": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainsApiB052BC92",
+            "RootResourceId",
+          ],
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomainsApiB052BC92",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "myURLShortenerCustomDomainsApiPOSTApiPermissionTestmyURLShortenerCustomDomainsApiEEC84A04POST7CBADCD4": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainsFunction80AEA6B9",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "myURLShortenerCustomDomainsApiB052BC92",
+              },
+              "/test-invoke-stage/POST/",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "myURLShortenerCustomDomainsApiPOSTApiPermissionmyURLShortenerCustomDomainsApiEEC84A04POST649BA5D1": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainsFunction80AEA6B9",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "myURLShortenerCustomDomainsApiB052BC92",
+              },
+              "/",
+              Object {
+                "Ref": "myURLShortenerCustomDomainsApiDeploymentStageprod8707A24D",
+              },
+              "/POST/",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "myURLShortenerCustomDomainsApiUsagePlan3248B663": Object {
+      "Properties": Object {
+        "ApiStages": Array [
+          Object {
+            "ApiId": Object {
+              "Ref": "myURLShortenerCustomDomainsApiB052BC92",
+            },
+            "Stage": Object {
+              "Ref": "myURLShortenerCustomDomainsApiDeploymentStageprod8707A24D",
+            },
+            "Throttle": Object {},
+          },
+        ],
+        "Description": "Usage plan for Default url shortener api",
+        "UsagePlanName": "Default-URLShortener-UsagePlan",
+      },
+      "Type": "AWS::ApiGateway::UsagePlan",
+    },
+    "myURLShortenerCustomDomainsApiUsagePlanUsagePlanKeyResource64D90427": Object {
+      "Properties": Object {
+        "KeyId": Object {
+          "Ref": "myURLShortenerCustomDomainsApiApiKey579C3FD2",
+        },
+        "KeyType": "API_KEY",
+        "UsagePlanId": Object {
+          "Ref": "myURLShortenerCustomDomainsApiUsagePlan3248B663",
+        },
+      },
+      "Type": "AWS::ApiGateway::UsagePlanKey",
+    },
+    "myURLShortenerCustomDomainsApiValidationModel4DA5AC01": Object {
+      "Properties": Object {
+        "ContentType": "application/json",
+        "Name": "ValidationModel",
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomainsApiB052BC92",
+        },
+        "Schema": Object {
+          "$schema": "http://json-schema.org/draft-04/schema#",
+          "properties": Object {
+            "url": Object {
+              "format": "uri",
+              "pattern": "^https?://",
+              "type": "string",
+            },
+          },
+          "required": Array [
+            "url",
+          ],
+          "type": "object",
+        },
+      },
+      "Type": "AWS::ApiGateway::Model",
+    },
+    "myURLShortenerCustomDomainsApiidAE2E8C4C": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainsApiB052BC92",
+            "RootResourceId",
+          ],
+        },
+        "PathPart": "{id}",
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomainsApiB052BC92",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "myURLShortenerCustomDomainsApiidGET29A33F93": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "Credentials": Object {
+            "Fn::GetAtt": Array [
+              "myURLShortenerCustomDomainsRole32BC97F9",
+              "Arn",
+            ],
+          },
+          "IntegrationHttpMethod": "POST",
+          "IntegrationResponses": Array [
+            Object {
+              "ResponseParameters": Object {
+                "method.response.header.Content-Type": "'text/html; charset=UTF-8'",
+                "method.response.header.Location": "integration.response.body.Attributes.url.S",
+              },
+              "ResponseTemplates": Object {
+                "text/html; charset=UTF-8": "#if($input.path('$.Attributes.url.S').isEmpty() == false)#set($url = $input.path('$.Attributes.url.S'))#set($context.responseOverride.header.Location = $url)<!DOCTYPE html><html><head><meta charset=\\"UTF-8\\" /><meta http-equiv=\\"refresh\\" content=\\"0;url=$url\\" /><title>Redirecting to $url</title></head><body>Redirecting to <a href=\\"$url\\">$url</a>.</body></html>#else#set($context.responseOverride.status = 404)#end",
+              },
+              "SelectionPattern": "200",
+              "StatusCode": "301",
+            },
+            Object {
+              "ResponseTemplates": Object {
+                "text/html": "Not Found",
+              },
+              "StatusCode": "404",
+            },
+          ],
+          "PassthroughBehavior": "WHEN_NO_TEMPLATES",
+          "RequestTemplates": Object {
+            "application/json": Object {
+              "Fn::Join": Array [
+                "",
+                Array [
+                  "{\\"TableName\\":\\"",
+                  Object {
+                    "Ref": "myURLShortenerCustomDomainsTable35CD0EC2",
+                  },
+                  "\\",\\"Key\\":{\\"id\\":{\\"S\\":\\"$input.params('id')\\"}},\\"UpdateExpression\\":\\"set clicks = clicks + :num, last_click_ts = :rt\\",\\"ConditionExpression\\":\\"attribute_exists(id)\\",\\"ProjectionExpression\\":\\"id, url\\",\\"ExpressionAttributeValues\\":{\\":num\\":{\\"N\\":\\"1\\"},\\":rt\\":{\\"N\\":\\"$context.requestTimeEpoch\\"}},\\"ReturnValues\\":\\"ALL_NEW\\"}",
+                ],
+              ],
+            },
+          },
+          "Type": "AWS",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":dynamodb:action/UpdateItem",
+              ],
+            ],
+          },
+        },
+        "MethodResponses": Array [
+          Object {
+            "ResponseParameters": Object {
+              "method.response.header.Content-Type": true,
+              "method.response.header.Location": true,
+            },
+            "StatusCode": "301",
+          },
+          Object {
+            "StatusCode": "404",
+          },
+        ],
+        "ResourceId": Object {
+          "Ref": "myURLShortenerCustomDomainsApiidAE2E8C4C",
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomainsApiB052BC92",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "myURLShortenerCustomDomainsApivalidator9F5437E6": Object {
+      "Properties": Object {
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomainsApiB052BC92",
+        },
+        "ValidateRequestBody": true,
+      },
+      "Type": "AWS::ApiGateway::RequestValidator",
+    },
+    "myURLShortenerCustomDomainsDnsValidatedCertificate07d0f0CertificateRequestorFunction81A09EC5": Object {
+      "DependsOn": Array [
+        "myURLShortenerCustomDomainsDnsValidatedCertificate07d0f0CertificateRequestorFunctionServiceRoleDefaultPolicy5E471A85",
+        "myURLShortenerCustomDomainsDnsValidatedCertificate07d0f0CertificateRequestorFunctionServiceRole6C3C6097",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2S3BucketFCCD3A76",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2S3VersionKey07AF06B6",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2S3VersionKey07AF06B6",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Handler": "index.certificateRequestHandler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainsDnsValidatedCertificate07d0f0CertificateRequestorFunctionServiceRole6C3C6097",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs10.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "myURLShortenerCustomDomainsDnsValidatedCertificate07d0f0CertificateRequestorFunctionServiceRole6C3C6097": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "myURLShortenerCustomDomainsDnsValidatedCertificate07d0f0CertificateRequestorFunctionServiceRoleDefaultPolicy5E471A85": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "acm:RequestCertificate",
+                "acm:DescribeCertificate",
+                "acm:DeleteCertificate",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": "route53:GetChange",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": "route53:changeResourceRecordSets",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    "arn:",
+                    Object {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":route53:::hostedzone/fakeZoneId",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "myURLShortenerCustomDomainsDnsValidatedCertificate07d0f0CertificateRequestorFunctionServiceRoleDefaultPolicy5E471A85",
+        "Roles": Array [
+          Object {
+            "Ref": "myURLShortenerCustomDomainsDnsValidatedCertificate07d0f0CertificateRequestorFunctionServiceRole6C3C6097",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "myURLShortenerCustomDomainsDnsValidatedCertificate07d0f0CertificateRequestorResource0FFE2328": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "DomainName": "foo.mydomain.com",
+        "HostedZoneId": "fakeZoneId",
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainsDnsValidatedCertificate07d0f0CertificateRequestorFunction81A09EC5",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::CloudFormation::CustomResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "myURLShortenerCustomDomainsDnsValidatedCertificate11a9edCertificateRequestorFunctionD6A8F6A7": Object {
+      "DependsOn": Array [
+        "myURLShortenerCustomDomainsDnsValidatedCertificate11a9edCertificateRequestorFunctionServiceRoleDefaultPolicyB16C4092",
+        "myURLShortenerCustomDomainsDnsValidatedCertificate11a9edCertificateRequestorFunctionServiceRole7EE33708",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2S3BucketFCCD3A76",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2S3VersionKey07AF06B6",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2S3VersionKey07AF06B6",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Handler": "index.certificateRequestHandler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainsDnsValidatedCertificate11a9edCertificateRequestorFunctionServiceRole7EE33708",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs10.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "myURLShortenerCustomDomainsDnsValidatedCertificate11a9edCertificateRequestorFunctionServiceRole7EE33708": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "myURLShortenerCustomDomainsDnsValidatedCertificate11a9edCertificateRequestorFunctionServiceRoleDefaultPolicyB16C4092": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "acm:RequestCertificate",
+                "acm:DescribeCertificate",
+                "acm:DeleteCertificate",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": "route53:GetChange",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": "route53:changeResourceRecordSets",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    "arn:",
+                    Object {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":route53:::hostedzone/fakeZoneId",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "myURLShortenerCustomDomainsDnsValidatedCertificate11a9edCertificateRequestorFunctionServiceRoleDefaultPolicyB16C4092",
+        "Roles": Array [
+          Object {
+            "Ref": "myURLShortenerCustomDomainsDnsValidatedCertificate11a9edCertificateRequestorFunctionServiceRole7EE33708",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "myURLShortenerCustomDomainsDnsValidatedCertificate11a9edCertificateRequestorResourceAE497C79": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "DomainName": "mydomain.com",
+        "HostedZoneId": "fakeZoneId",
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainsDnsValidatedCertificate11a9edCertificateRequestorFunctionD6A8F6A7",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::CloudFormation::CustomResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "myURLShortenerCustomDomainsDnsValidatedCertificatecbf66dCertificateRequestorFunction613C3D69": Object {
+      "DependsOn": Array [
+        "myURLShortenerCustomDomainsDnsValidatedCertificatecbf66dCertificateRequestorFunctionServiceRoleDefaultPolicyAABC59CE",
+        "myURLShortenerCustomDomainsDnsValidatedCertificatecbf66dCertificateRequestorFunctionServiceRoleA9354906",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2S3BucketFCCD3A76",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2S3VersionKey07AF06B6",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters19e461d2ff1a5b90438fed6ceee4c197d7efee8712a6f76d85b501ab20bfb1a2S3VersionKey07AF06B6",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Handler": "index.certificateRequestHandler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainsDnsValidatedCertificatecbf66dCertificateRequestorFunctionServiceRoleA9354906",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs10.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "myURLShortenerCustomDomainsDnsValidatedCertificatecbf66dCertificateRequestorFunctionServiceRoleA9354906": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "myURLShortenerCustomDomainsDnsValidatedCertificatecbf66dCertificateRequestorFunctionServiceRoleDefaultPolicyAABC59CE": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "acm:RequestCertificate",
+                "acm:DescribeCertificate",
+                "acm:DeleteCertificate",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": "route53:GetChange",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": "route53:changeResourceRecordSets",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    "arn:",
+                    Object {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":route53:::hostedzone/fakeZoneId",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "myURLShortenerCustomDomainsDnsValidatedCertificatecbf66dCertificateRequestorFunctionServiceRoleDefaultPolicyAABC59CE",
+        "Roles": Array [
+          Object {
+            "Ref": "myURLShortenerCustomDomainsDnsValidatedCertificatecbf66dCertificateRequestorFunctionServiceRoleA9354906",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "myURLShortenerCustomDomainsDnsValidatedCertificatecbf66dCertificateRequestorResourceE1B701BC": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "DomainName": "bar.mydomain.com",
+        "HostedZoneId": "fakeZoneId",
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainsDnsValidatedCertificatecbf66dCertificateRequestorFunction613C3D69",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::CloudFormation::CustomResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "myURLShortenerCustomDomainsDomainName07d0f0BE9E8F82": Object {
+      "Properties": Object {
+        "DomainName": "foo.mydomain.com",
+        "EndpointConfiguration": Object {
+          "Types": Array [
+            "REGIONAL",
+          ],
+        },
+        "RegionalCertificateArn": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainsDnsValidatedCertificate07d0f0CertificateRequestorResource0FFE2328",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ApiGateway::DomainName",
+    },
+    "myURLShortenerCustomDomainsDomainName07d0f0MapmyURLShortenerCustomDomainsApiEEC84A04F55B4BE9": Object {
+      "Properties": Object {
+        "DomainName": Object {
+          "Ref": "myURLShortenerCustomDomainsDomainName07d0f0BE9E8F82",
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomainsApiB052BC92",
+        },
+        "Stage": Object {
+          "Ref": "myURLShortenerCustomDomainsApiDeploymentStageprod8707A24D",
+        },
+      },
+      "Type": "AWS::ApiGateway::BasePathMapping",
+    },
+    "myURLShortenerCustomDomainsDomainName11a9edBF8B86E2": Object {
+      "Properties": Object {
+        "DomainName": "mydomain.com",
+        "EndpointConfiguration": Object {
+          "Types": Array [
+            "REGIONAL",
+          ],
+        },
+        "RegionalCertificateArn": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainsDnsValidatedCertificate11a9edCertificateRequestorResourceAE497C79",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ApiGateway::DomainName",
+    },
+    "myURLShortenerCustomDomainsDomainName11a9edMapmyURLShortenerCustomDomainsApiEEC84A043D3ED708": Object {
+      "Properties": Object {
+        "DomainName": Object {
+          "Ref": "myURLShortenerCustomDomainsDomainName11a9edBF8B86E2",
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomainsApiB052BC92",
+        },
+        "Stage": Object {
+          "Ref": "myURLShortenerCustomDomainsApiDeploymentStageprod8707A24D",
+        },
+      },
+      "Type": "AWS::ApiGateway::BasePathMapping",
+    },
+    "myURLShortenerCustomDomainsDomainNamecbf66d393054E8": Object {
+      "Properties": Object {
+        "DomainName": "bar.mydomain.com",
+        "EndpointConfiguration": Object {
+          "Types": Array [
+            "REGIONAL",
+          ],
+        },
+        "RegionalCertificateArn": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainsDnsValidatedCertificatecbf66dCertificateRequestorResourceE1B701BC",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ApiGateway::DomainName",
+    },
+    "myURLShortenerCustomDomainsDomainNamecbf66dMapmyURLShortenerCustomDomainsApiEEC84A04B84BE816": Object {
+      "Properties": Object {
+        "DomainName": Object {
+          "Ref": "myURLShortenerCustomDomainsDomainNamecbf66d393054E8",
+        },
+        "RestApiId": Object {
+          "Ref": "myURLShortenerCustomDomainsApiB052BC92",
+        },
+        "Stage": Object {
+          "Ref": "myURLShortenerCustomDomainsApiDeploymentStageprod8707A24D",
+        },
+      },
+      "Type": "AWS::ApiGateway::BasePathMapping",
+    },
+    "myURLShortenerCustomDomainsFunction80AEA6B9": Object {
+      "DependsOn": Array [
+        "myURLShortenerCustomDomainsFunctionServiceRoleDefaultPolicy1FC58699",
+        "myURLShortenerCustomDomainsFunctionServiceRole99B4371A",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3Bucket46CAA9D9",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3VersionKey04669B18",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersf7faaffe12eeb017b8a80e58940c1dfca5e180d4fb961c39778967cbc843fb0bS3VersionKey04669B18",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "KEY_NAME": "id",
+            "TABLE_NAME": Object {
+              "Ref": "myURLShortenerCustomDomainsTable35CD0EC2",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "myURLShortenerCustomDomainsFunctionServiceRole99B4371A",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "myURLShortenerCustomDomainsFunctionServiceRole99B4371A": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "myURLShortenerCustomDomainsFunctionServiceRoleDefaultPolicy1FC58699": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+              ],
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "myURLShortenerCustomDomainsTable35CD0EC2",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Ref": "AWS::NoValue",
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "myURLShortenerCustomDomainsFunctionServiceRoleDefaultPolicy1FC58699",
+        "Roles": Array [
+          Object {
+            "Ref": "myURLShortenerCustomDomainsFunctionServiceRole99B4371A",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "myURLShortenerCustomDomainsRole32BC97F9": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Policies": Array [
+          Object {
+            "PolicyDocument": Object {
+              "Statement": Array [
+                Object {
+                  "Action": "dynamodb:UpdateItem",
+                  "Effect": "Allow",
+                  "Resource": Object {
+                    "Fn::GetAtt": Array [
+                      "myURLShortenerCustomDomainsTable35CD0EC2",
+                      "Arn",
+                    ],
+                  },
+                },
+              ],
+              "Version": "2012-10-17",
+            },
+            "PolicyName": "APIGatewayDynamoDBUpdateItem",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "myURLShortenerCustomDomainsTable35CD0EC2": Object {
+      "DeletionPolicy": "Retain",
+      "Properties": Object {
+        "AttributeDefinitions": Array [
+          Object {
+            "AttributeName": "id",
+            "AttributeType": "S",
+          },
+        ],
+        "KeySchema": Array [
+          Object {
+            "AttributeName": "id",
+            "KeyType": "HASH",
+          },
+        ],
+        "ProvisionedThroughput": Object {
+          "ReadCapacityUnits": 5,
+          "WriteCapacityUnits": 5,
+        },
+      },
+      "Type": "AWS::DynamoDB::Table",
+      "UpdateReplacePolicy": "Retain",
+    },
+  },
+}
+`;
