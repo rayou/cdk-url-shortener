@@ -208,5 +208,8 @@
   "files": [
     "lib",
     ".jsii"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

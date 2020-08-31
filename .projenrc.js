@@ -93,6 +93,11 @@ project.addPeerDependencies({
 });
 project.addScriptCommand('compile:lambda', ['rollup -c']);
 project.addScriptCommand('postcompile', ['yarn run compile:lambda']);
+project.addFields({
+  publishConfig: {
+    access: 'public', // to allow publishing scoped package
+  },
+});
 
 // ESLint
 project.eslint.addRules({
