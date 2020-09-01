@@ -1,6 +1,6 @@
 # cdk-url-shortener <!-- omit in toc -->
 
-![Release](https://github.com/rayou/cdk-url-shortener/workflows/Release/badge.svg) [![typescript](https://img.shields.io/badge/jsii-typescript-blueviolet.svg)](https://www.npmjs.com/package/@rayou/cdk-url-shortener) [![python](https://img.shields.io/badge/jsii-python-blueviolet.svg)](https://pypi.org/project/rayou.cdk-url-shortener/)
+![Release](https://github.com/rayou/cdk-url-shortener/workflows/Release/badge.svg) [![npm](https://img.shields.io/npm/v/@rayou/cdk-url-shortener)](https://www.npmjs.com/package/@rayou/cdk-url-shortener) [![PyPI](https://img.shields.io/pypi/v/rayou.cdk_url_shortener)](https://pypi.org/project/rayou.cdk-url-shortener/)
 
 > Deploy a URL shortener with custom domain support in just a few lines of code.
 
