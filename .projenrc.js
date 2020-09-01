@@ -72,6 +72,10 @@ const project = new JsiiProject({
     mavenGroupId: 'com.github.rayou',
     mavenArtifactId: 'cdk-url-shortener',
   },
+  dotnet: {
+    dotNetNamespace: 'CDK.URLShortener',
+    packageId: 'CDK.URLShortener',
+  },
 });
 
 // CDK
