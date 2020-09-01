@@ -45,6 +45,7 @@ const project = new JsiiProject({
   authorUrl: 'https://twitter.com/_rayou',
   repository: 'https://github.com/rayou/cdk-url-shortener.git',
   stability: Stability.EXPERIMENTAL,
+  releaseEveryCommit: false,
   peerDependencyOptions: {
     pinnedDevDependency: false,
   },
