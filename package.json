@@ -192,6 +192,13 @@
   "jsii": {
     "outdir": "dist",
     "targets": {
+      "java": {
+        "package": "com.github.rayou.urlshortener",
+        "maven": {
+          "groupId": "com.github.rayou",
+          "artifactId": "cdk-url-shortener"
+        }
+      },
       "python": {
         "distName": "rayou.cdk-url-shortener",
         "module": "rayou.cdk_url_shortener"

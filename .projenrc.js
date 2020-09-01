@@ -67,6 +67,11 @@ const project = new JsiiProject({
     distName: 'rayou.cdk-url-shortener',
     module: 'rayou.cdk_url_shortener',
   },
+  java: {
+    javaPackage: 'com.github.rayou.urlshortener',
+    mavenGroupId: 'com.github.rayou',
+    mavenArtifactId: 'cdk-url-shortener',
+  },
 });
 
 // CDK
