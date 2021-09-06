@@ -1447,9 +1447,9 @@ aws-lambda@^1.0.6:
     watchpack "^2.0.0-beta.10"
 
 aws-sdk@*, aws-sdk@^2.738.0:
-  version "2.742.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.742.0.tgz#02373d324ca8201cd3fc8c1b82eff8b48b593f4c"
-  integrity sha512-zntDB0BpMn/y+B4RQvXuqY8DmJDYPkeFjZ6BbZ6vdNrsdB5TRz8p53ats4D3mLG068RB4M4AmVioFnU69nDXyQ==
+  version "2.983.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.983.0.tgz#4c6d98d802b2cf159acbc105979b892b427b5fb3"
+  integrity sha512-i4QMJt5hEYzhoDzmbo0v+aAuHQPXM6ah15GBKObbxwYxmzK9wjMG+FH3DiWZZHdFsf3C+p1zDg4rIr63jmOeBw==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"
